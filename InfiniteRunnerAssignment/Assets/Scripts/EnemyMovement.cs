@@ -13,8 +13,8 @@ public class EnemyMovement : MonoBehaviour
     private float xPos;
     private float yPos;
 
-    private int randTime = Random.Range(0,3);
-    private int randRepeat = Random.Range(0,5);
+    //private int randTime = Random.Range(0,3);
+    //private int randRepeat = Random.Range(0,5);
 
     // Start is called before the first frame update
     void Start()

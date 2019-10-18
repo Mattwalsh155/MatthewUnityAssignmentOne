@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // reference to GameManager
+    public GameManager gameManager;
     // Make a reference to the rigidbody so we can access it
     private Rigidbody2D playerRigidbody;
 
@@ -32,13 +34,27 @@ public class PlayerController : MonoBehaviour
     {
         //ResetAnimation();
 
-        if (Input.GetKey(KeyCode.Space) && isJumping == false)
-        {
-            animator.SetBool("Jumping", true);
-            isJumping = true;
-            //addforce here
-            playerRigidbody.AddForce(Vector2.up * jumpForce);
-        }
+        if (!gameManager.isPaused)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    gameManager.PauseGame();
+                }
+                if (Input.GetKey(KeyCode.Space) && isJumping == false)
+                {
+                    animator.SetBool("Jumping", true);
+                    isJumping = true;
+                    //addforce here
+                    playerRigidbody.AddForce(Vector2.up * jumpForce);
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    gameManager.UnpauseGame();
+                }
+            }
     }
 
     void OnCollisionEnter2D(Collision2D other) 
