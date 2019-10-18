@@ -8,8 +8,8 @@ public class BackgroundScrolling : MonoBehaviour
 
     public float bgSpeed;
 
-    public float bgPosLeft = -28;
-    public float bgPosRight = 16.2f;
+    private float bgPosLeft = -28;
+    private float bgPosRight = 60.98f;
 
     // Start is called before the first frame update
     void Start()

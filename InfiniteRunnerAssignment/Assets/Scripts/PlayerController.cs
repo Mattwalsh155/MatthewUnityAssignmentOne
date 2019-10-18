@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     // Need a variable to handle the jumping
     public bool isJumping = false;
+    public bool isDead = false;
     public int jumpForce = 100;
 
     public Animator animator;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     void ResetAnimation()
     {
         animator.SetBool("Jumping", false);
+        animator.SetBool("Dying", false);
     }
 
     // Update is called once per frame
@@ -41,10 +43,27 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        if (other.gameObject.name == "Platform")
+        if (other.gameObject.tag == "Platform" && isDead == false)
         {
             isJumping = false;
             animator.SetBool("Jumping", false);
+        }
+        else 
+        {
+            animator.SetBool("Jumping", false);
+            animator.SetBool("Dying", true);
+        }
+        
+        if (other.gameObject.tag == "Enemy")
+        {
+            isDead = true;
+            animator.SetBool("Dying", true);
+            isJumping = true;
+        }
+
+        if (other.gameObject.tag == "Pickup")
+        {
+            Destroy(other.gameObject);
         }
     }
 
