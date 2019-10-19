@@ -26,6 +26,7 @@ public class BackgroundScrolling : MonoBehaviour
         background[i].transform.Translate(new Vector2(-1,0) * bgSpeed * Time.deltaTime);
 
         //Debug.Log(background[1].transform.position.x);
+        // do something like this to destroy the enemy and pickup
         if (background[i].transform.position.x <= bgPosLeft)
             {
                 background[i].transform.position = new Vector3(bgPosRight,background[i].transform.position.y,background[i].transform.position.z);

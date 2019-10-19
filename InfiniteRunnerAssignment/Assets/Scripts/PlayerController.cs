@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    public AudioSource jumpSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
                     isJumping = true;
                     //addforce here
                     playerRigidbody.AddForce(Vector2.up * jumpForce);
+                    jumpSound.Play();
                 }
             }
             else
@@ -64,22 +67,25 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             animator.SetBool("Jumping", false);
         }
-        else 
-        {
-            animator.SetBool("Jumping", false);
-            animator.SetBool("Dying", true);
-        }
+        // This part wasn't needed. Didn't make any sense
+        // else 
+        // {
+        //     animator.SetBool("Jumping", false);
+        //     animator.SetBool("Dying", true);
+        // }
         
         if (other.gameObject.tag == "Enemy")
         {
             isDead = true;
             animator.SetBool("Dying", true);
             isJumping = true;
+            gameManager.isGameOver = true;
         }
 
         if (other.gameObject.tag == "Pickup")
         {
             Destroy(other.gameObject);
+            gameManager.score += 1000;
         }
     }
 

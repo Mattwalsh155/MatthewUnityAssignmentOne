@@ -8,20 +8,21 @@ public class PickupScript : MonoBehaviour
 
     public float pickupSpeed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float pickupPos = -7;
 
     // Update is called once per frame
     void Update()
     {
         pickup.transform.Translate(new Vector2(-1,0) * pickupSpeed * Time.deltaTime);
+
+        if (pickup.transform.position.x <= pickupPos)
+        {
+            DestroyPickup();
+        }
     }
 
-    void OnCollisionEnter2D(Collision2D other) 
+    public void DestroyPickup()
     {
-        
+        Destroy(this.gameObject);
     }
 }

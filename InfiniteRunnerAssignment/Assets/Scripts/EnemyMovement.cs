@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     private int randNumber;
     private float xPos;
     private float yPos;
+    private float enemyPos = -7;
 
     //private int randTime = Random.Range(0,3);
     //private int randRepeat = Random.Range(0,5);
@@ -30,6 +31,12 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         enemy.transform.Translate(new Vector2(-1,0) * enemySpeed * Time.deltaTime);
+        //Debug.Log(enemy.transform.position.x);
+
+        if (enemy.transform.position.x <= enemyPos)
+            {
+                DestroyEnemy();
+            }
     }
 
     void SpawnEnemy()
@@ -39,8 +46,10 @@ public class EnemyMovement : MonoBehaviour
         temp.transform.position = new Vector2(xPos,0);
     }
 
+    //this will be called in the if statement in the update function
     void DestroyEnemy()
     {
-        
+        Debug.Log("Enemy Destroyed");
+        Destroy(this.gameObject);
     }
 }
